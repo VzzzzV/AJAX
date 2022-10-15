@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX FET 请求</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 100px;
+            border: solid 1px #90b;
+        }
+    </style>
+</head>
+<body>
+    <button>点击发送请求</button>
+    <div id = "result"></div>
+    <script>
+        // 获取button元素
+        const btn = document.getElementsByTagName('button')[0];
+        const result = document.getElementById("result");
+        // 绑定时间
+        btn.onclick = function(){
+            //创建对象
+            const xhr = new XMLHttpRequest();
+            //初始化，设置请求方法
+            // xhr.open('GET','http://127.0.0.1:8000/server');
+            // ？分割传递参数，=赋值,&分割多个参数
+            xhr.open('GET','http://127.0.0.1:8000/server?a=100&b=200');
+            //发送
+            xhr.send();
+            // 时间绑定，处理服务端返回结果
+            //readystate是xhr对象中的属性，表示0，1，2，3，4
+            xhr.onreadystatechange = function(){
+                //4的时候表示所有结果都返回
+                if(xhr.readyState == 4){
+                    //判断响应状态码
+                    if(xhr.status >= 200 && xhr.status <300){
+                        //处理结果 行 头空行 体
+                        //1. 响应行 协议版本 状态码 状态字符串
+                        // console.log(xhr.status);//状态码
+                        // console.log(xhr.statusText);//状态字符串
+                        // console.log(xhr.getAllResponseHeaders());//响应头
+                        // console.log(xhr.response);//响应体
+                        
+                        // 设置result 文本
+                        result.innerHTML = xhr.response;
+                    }
+                    else{
+
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

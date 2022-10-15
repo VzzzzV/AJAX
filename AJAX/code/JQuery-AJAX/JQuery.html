@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <button class="btn btn-primary">GET</button>
+    <button class="btn btn-danger">POST</button>
+    <button class="btn btn-info">通用型方法</button>
+    <script>
+        $('button').eq(0).click(function(){
+            $.get('http://127.0.0.1:8000/JQuary',{a:100,b:200},function(data){
+                console.log(data);
+            },'json');
+        });
+        $('button').eq(1).click(function(){
+            $.post('http://127.0.0.1:8000/JQuary',{a:100,b:200},function(data){
+                console.log(data);
+            });
+        });
+        $('button').eq(2).click(function(){
+            $.ajax({
+                //url
+                url: 'http://127.0.0.1:8000/JQuary',
+                //参数
+                data: {a:100,b:200},
+                type: 'GET',
+                //响应结果
+                dataType:'json',
+                //超时时间
+                timeout :2000,
+                //失败回掉
+                error:function(){
+                  console.log('出错了')  
+                },
+                success: function(data){
+                    console.log(data);
+                }
+            })
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axio 发送AJAX请求</title>
+</head>
+<body>
+    <button class="btn btn-info">AJAX</button>
+    <script>
+        const btns = document.getElementsByTagName('button')[0];
+        btns.onclick = function(){
+            fetch('http://127.0.0.1:8000/fetch',{
+                //请求方式
+                method: 'POST',
+                //请求头
+                headers: {
+                    name: 'zhan'
+                },
+                //请求体
+                body:'username=admin&passord=admin'
+        }).then(response=>{
+            return response.text();
+            return response.json();
+        }).then(response=>{
+            console.log(response)
+        });
+    }
+    </script>
+</body>
+</html>
